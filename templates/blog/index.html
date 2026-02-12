@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cats Curios</title>
+</head>
+<body>
+    <h1>Cats Curios 🐾</h1>
+
+    {% for post in posts %}
+        <div>
+            <h2>
+                <a href="{% url 'post_detail' post.slug %}">
+                    {{ post.title }}
+                </a>
+            </h2>
+
+            {% if post.image %}
+                <img src="{{ post.image.url }}" width="300">
+            {% endif %}
+
+            <p>{{ post.excerpt }}</p>
+            <p>Mood: {{ post.mood }}</p>
+            <hr>
+        </div>
+    {% empty %}
+        <p>No posts yet.</p>
+    {% endfor %}
+</body>
+</html>
