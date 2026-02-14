@@ -37,7 +37,7 @@ Follow Agile methodology
 
 👥 User Stories
 
-(You can summarise here and link to GitHub issues)
+Development tracked via GitHub Projects using iterative user stories and MVP-first delivery.
 
 🧱 MVP Features
 
@@ -65,15 +65,13 @@ Heroku
 
 GitHub
 
-🧩 Future Features
+💬 Comment System
 
-Post reactions
+Authenticated user commenting
 
-Mood filtering
+Post–User relational database design
 
-Analytics dashboard
-
-Real-time chat
+Form validation using Crispy Forms
 
 🎨 Wireframes
 
