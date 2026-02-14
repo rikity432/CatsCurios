@@ -39,6 +39,11 @@ Follow Agile methodology
 
 Development tracked via GitHub Projects using iterative user stories and MVP-first delivery.
 
+- US18 – User Profile Creation: Users automatically receive a profile when registering.
+- US19 – View Profile: Visitors can view profile pages.
+- US20 – Edit Profile: Authenticated users can edit their profile.
+- US21 – About Page: Visitors can learn about the project and its purpose.
+
 🧱 MVP Features
 
 User registration/login/logout
@@ -48,6 +53,10 @@ View all posts
 View single post
 
 Comment on posts
+
+User profiles (bio + avatar)
+
+About page
 
 Admin post creation
 
@@ -72,6 +81,18 @@ Authenticated user commenting
 Post–User relational database design
 
 Form validation using Crispy Forms
+
+👤 User Profiles
+
+Extended Django User via a One-to-One `Profile` model.
+
+Automatic profile creation using Django signals.
+
+Editable avatars stored via Cloudinary.
+
+ℹ️ About Page
+
+Provides project context, development goals, and technology overview.
 
 🎨 Wireframes
 

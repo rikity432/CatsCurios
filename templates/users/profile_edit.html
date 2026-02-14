@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Edit Profile | Cats Curios{% endblock %}
+
+{% block content %}
+<h2>Edit profile</h2>
+<form method="post" enctype="multipart/form-data" class="mt-3" novalidate>
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button class="btn btn-dark" type="submit">Save</button>
+    <a class="btn btn-outline-secondary" href="{% url 'profile' request.user.username %}">Cancel</a>
+</form>
+{% endblock %}

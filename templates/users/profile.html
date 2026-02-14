@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}{{ profile_user.username }} | Profile{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                {% if profile and profile.profile_image %}
+                    <img src="{{ profile.profile_image.url }}" class="img-fluid rounded-circle mb-3" style="max-width: 160px;">
+                {% else %}
+                    <div class="rounded-circle bg-light d-inline-flex align-items-center justify-content-center mb-3" style="width: 160px; height: 160px;">
+                        <span class="text-muted">No image</span>
+                    </div>
+                {% endif %}
+
+                <h3 class="mb-1">{{ profile_user.username }}</h3>
+                <div class="text-muted">Joined {{ profile_user.date_joined|date:"F j, Y" }}</div>
+
+                {% if profile and profile.bio %}
+                    <p class="mt-3">{{ profile.bio|linebreaksbr }}</p>
+                {% else %}
+                    <p class="mt-3 text-muted">No bio yet.</p>
+                {% endif %}
+
+                {% if user.is_authenticated and user == profile_user %}
+                    <a href="{% url 'profile_edit' %}" class="btn btn-primary btn-sm">Edit Profile</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-8 mt-3 mt-md-0">
+        <h4>Recent comments</h4>
+        {% if recent_comments %}
+            {% for comment in recent_comments %}
+                <div class="border rounded p-2 mb-2">
+                    <div class="small text-muted">
+                        On <a href="{% url 'post_detail' comment.post.slug %}">{{ comment.post.title }}</a> • {{ comment.created_on }}
+                    </div>
+                    <div>{{ comment.body|linebreaksbr }}</div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-muted">No comments yet.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
