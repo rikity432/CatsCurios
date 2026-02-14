@@ -76,3 +76,27 @@ Form validation using Crispy Forms
 🎨 Wireframes
 
 (Add images here later)
+
+📄 Content Management
+
+Admin-controlled publishing workflow
+
+Comment moderation system
+
+Draft vs published posts
+
+🔎 User Experience Features
+
+Pagination for scalable browsing
+
+Mood-based post filtering
+
+Responsive Bootstrap layout
+
+🛡️ Permissions & Security
+
+Authenticated commenting
+
+Admin-only publishing
+
+Moderated user content

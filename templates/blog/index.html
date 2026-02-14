@@ -5,7 +5,27 @@
 {% block content %}
 
 <h1 class="mb-4">Latest Adventures</h1>
+<div class="mt-4">
+{% if is_paginated %}
+  <nav>
+    {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
 
+    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">Next</a>
+    {% endif %}
+  </nav>
+{% endif %}
+</div>
+<div class="mb-3">
+<a href="/" class="btn btn-outline-dark btn-sm">All</a>
+<a href="?mood=happy" class="btn btn-outline-dark btn-sm">Happy</a>
+<a href="?mood=sleepy" class="btn btn-outline-dark btn-sm">Sleepy</a>
+<a href="?mood=curious" class="btn btn-outline-dark btn-sm">Curious</a>
+</div>
 <div class="row">
     {% for post in posts %}
     <div class="col-md-4 mb-4">
