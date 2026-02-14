@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.views.generic import DetailView, ListView
 
 from .forms import CommentForm
-from .models import Post
+from .models import MOOD_CHOICES, Post
 
 # Create your views here.
 
@@ -13,9 +13,18 @@ class PostList(ListView):
     model = Post
     template_name = 'blog/index.html'
     context_object_name = 'posts'
+    paginate_by = 6
 
     def get_queryset(self):
-        return Post.objects.filter(status=1).order_by('-created_on')
+        queryset = Post.objects.filter(status=1).order_by('-created_on')
+
+        mood = self.request.GET.get("mood")
+        if mood:
+            allowed_moods = {key for key, _label in MOOD_CHOICES}
+            if mood in allowed_moods:
+                queryset = queryset.filter(mood=mood)
+
+        return queryset
 
 
 class PostDetail(DetailView):
@@ -50,8 +59,9 @@ class PostDetail(DetailView):
             comment = comment_form.save(commit=False)
             comment.post = self.object
             comment.user = request.user
+            comment.approved = False
             comment.save()
-            messages.success(request, "Comment posted.")
+            messages.success(request, "Comment awaiting moderator approval.")
             return HttpResponseRedirect(request.path)
 
         context = self.get_context_data(comment_form=comment_form)

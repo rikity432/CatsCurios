@@ -7,6 +7,9 @@ from .models import Post, Comment
 class CommentInline(admin.TabularInline):
     model = Comment
     extra = 0
+    fields = ("user", "body", "approved", "created_on")
+    readonly_fields = ("created_on",)
+    show_change_link = True
 
 
 @admin.action(description="Approve selected posts (publish)")
