@@ -18,4 +18,42 @@
     </div>
 </div>
 
+<div class="mt-4">
+    <h4>Comments ({{ comments|length }})</h4>
+
+    {% if comments %}
+        {% for comment in comments %}
+            <div class="border rounded p-2 mb-2">
+                <div class="small text-muted">
+                    {{ comment.user }} • {{ comment.created_on }}
+                </div>
+                <div>{{ comment.body|linebreaksbr }}</div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="text-muted">No comments yet. Be the first to comment.</p>
+    {% endif %}
+
+    <hr>
+
+    <h5 class="mt-3">Leave a comment</h5>
+
+    {% if user.is_authenticated %}
+        <form method="post" class="mt-2">
+            {% csrf_token %}
+            {{ comment_form.non_field_errors }}
+            <div class="mb-3">
+                {{ comment_form.body.errors }}
+                {{ comment_form.body }}
+            </div>
+            <button type="submit" class="btn btn-primary">Post comment</button>
+        </form>
+    {% else %}
+        <p>
+            <a href="{% url 'login' %}?next={{ request.path }}">Log in</a>
+            to leave a comment.
+        </p>
+    {% endif %}
+</div>
+
 {% endblock %}
