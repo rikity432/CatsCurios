@@ -1,17 +1,69 @@
 ﻿# CatsCurios
 
-🐱 Cats Curios
-📌 Overview
+A playful Django web application documenting the daily adventures of a curious cat through blog-style entries, interactive reactions, and live community features.
 
-Cats Curios is a playful yet professional full-stack Django web application that documents the daily adventures of a fictional cat wearing a collar camera. Users can register, interact with posts, and engage in the cat’s daily curiosities.
+Live Site: (Heroku link)
+Repository: (GitHub link)
 
-The project demonstrates full-stack development using:
+📖 Project Overview
 
-HTML
+Cats Curios is a full-stack Django application built as a final capstone project during a 16-week programming skills bootcamp.
 
-CSS
+The platform allows users to follow a fictional cat’s daily experiences, interact through comments and reactions, and participate in a live chat environment.
 
-JavaScript
+The project demonstrates modern full-stack development practices including authentication, database design, AJAX interactions, and deployment.
+
+🎯 Project Goals
+
+Build a full CRUD Django application
+
+Implement authentication & user profiles
+
+Demonstrate relational database design
+
+Use AJAX for dynamic UI updates
+
+Deploy a production-ready application
+
+✨ Features
+Core Features
+
+Admin-created blog posts
+
+User registration & login
+
+User profiles with images
+
+Comment system with admin approval
+
+Mood filtering & pagination
+
+Interactive Features
+
+AJAX like/reaction system
+
+Live chat with profanity filtering
+
+Cat status indicator (dynamic navbar)
+
+Online users tracker
+
+Mood analytics chart (Chart.js)
+
+🧱 Technology Stack
+Frontend
+
+HTML5
+
+CSS3
+
+Bootstrap
+
+JavaScript (AJAX)
+
+Chart.js
+
+Backend
 
 Python
 
@@ -19,114 +71,129 @@ Django
 
 PostgreSQL
 
-Heroku deployment
-
-🎯 Project Goals
-
-Implement full user authentication
-
-Build relational database models
-
-Enable user interaction through comments
-
-Handle image uploads
-
-Deploy to Heroku
-
-Follow Agile methodology
-
-👥 User Stories
-
-Development tracked via GitHub Projects using iterative user stories and MVP-first delivery.
-
-- US18 – User Profile Creation: Users automatically receive a profile when registering.
-- US19 – View Profile: Visitors can view profile pages.
-- US20 – Edit Profile: Authenticated users can edit their profile.
-- US21 – About Page: Visitors can learn about the project and its purpose.
-
-🧱 MVP Features
-
-User registration/login/logout
-
-View all posts
-
-View single post
-
-Comment on posts
-
-User profiles (bio + avatar)
-
-About page
-
-Admin post creation
-
-Image upload support
-
-🛠️ Tech Stack
-
-Django 5.x
-
-PostgreSQL
-
-Gunicorn
+Deployment & Tools
 
 Heroku
 
+Cloudinary
+
 GitHub
 
-💬 Comment System
+Crispy Forms
 
-Authenticated user commenting
+🗄 Database Design
+Entity Relationship Diagram
 
-Post–User relational database design
+(paste Mermaid ERD here)
 
-Form validation using Crispy Forms
+🧠 Agile Development
 
-👤 User Profiles
+Project planning followed Agile principles:
 
-Extended Django User via a One-to-One `Profile` model.
+User stories tracked via GitHub Projects
 
-Automatic profile creation using Django signals.
+Iterative feature delivery
 
-Editable avatars stored via Cloudinary.
+MVP-first development approach
 
-ℹ️ About Page
+Example User Story:
 
-Provides project context, development goals, and technology overview.
+As a user, I can like a post so that I can react to the cat’s adventures.
 
-🎨 Wireframes
+🚀 Deployment
 
-(Add images here later)
+Application deployed using Heroku:
 
-📄 Content Management
+PostgreSQL database configured
 
-Admin-controlled publishing workflow
+Cloudinary media storage enabled
 
-Comment moderation system
+Environment variables secured
 
-Draft vs published posts
+Static files collected via WhiteNoise
 
-🔎 User Experience Features
+🧪 Testing
 
-Pagination for scalable browsing
+Manual testing performed across:
 
-Mood-based post filtering
+Authentication flows
 
-Responsive Bootstrap layout
+Comment moderation
 
-🛡️ Permissions & Security
+AJAX interactions
 
-Authenticated commenting
+Mobile responsiveness
 
-Admin-only publishing
+🔮 Future Improvements
 
-Moderated user content
+WebSocket real-time chat
 
-## Features Implemented
+Follow favourite users
 
-- User authentication & profiles
-- Admin moderated comments
-- AJAX like system
-- Mood filtering & pagination
-- Cloudinary image uploads
-- Interactive Mood Analytics Chart (Chart.js + Django API)
+Cat achievement badges
+
+Notification system
+
+👨‍💻 Author
+
+Created as a capstone portfolio project demonstrating Django full-stack development skills.
+
+```mermaid
+erDiagram
+
+    User ||--|| Profile : has
+    User ||--o{ Comment : writes
+    User ||--o{ Reaction : likes
+    User ||--o{ ChatMessage : sends
+
+    Post ||--o{ Comment : receives
+    Post ||--o{ Reaction : receives
+
+    User {
+        int id PK
+        string username
+        string email
+        string password
+    }
+
+    Profile {
+        int id PK
+        int user_id FK
+        string bio
+        string profile_image
+        datetime last_seen
+    }
+
+    Post {
+        int id PK
+        string title
+        text content
+        string mood
+        image featured_image
+        datetime created_on
+        boolean approved
+    }
+
+    Comment {
+        int id PK
+        int user_id FK
+        int post_id FK
+        text body
+        boolean approved
+        datetime created_on
+    }
+
+    Reaction {
+        int id PK
+        int user_id FK
+        int post_id FK
+        datetime created_on
+    }
+
+    ChatMessage {
+        int id PK
+        int user_id FK
+        text message
+        datetime created_at
+    }
+```
