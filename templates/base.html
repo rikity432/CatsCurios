@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Cats Curios{% endblock %}</title>
 
+  {% load static %}
+
     <!-- Bootstrap 5 CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
 </head>
 <body>
 
@@ -53,6 +57,7 @@
 </nav>
 
 <div class="container mt-4">
+  <div class="page-surface p-4">
   {% if messages %}
     {% for message in messages %}
       <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
@@ -63,8 +68,47 @@
   {% endif %}
     {% block content %}
     {% endblock %}
+  </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.like-btn').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const url = button.dataset.likeUrl;
+      const postId = button.dataset.postId;
+
+      try {
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'X-CSRFToken': getCookie('csrftoken'),
+            'X-Requested-With': 'XMLHttpRequest',
+          },
+        });
+
+        if (response.redirected) {
+          window.location.href = response.url;
+          return;
+        }
+
+        const data = await response.json();
+        const countEl = document.getElementById(`like-count-${postId}`);
+        if (countEl) countEl.innerText = data.total_likes;
+      } catch (e) {
+        // fail silently; user can refresh
+      }
+    });
+  });
+});
+</script>
 </body>
 </html>

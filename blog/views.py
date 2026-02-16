@@ -1,9 +1,10 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from django.views.generic import DetailView, ListView
+from django.views.decorators.http import require_POST
 
 from .forms import CommentForm
 from .models import MOOD_CHOICES, Post, Reaction
@@ -70,11 +71,17 @@ class PostDetail(DetailView):
 
 
 @login_required
+@require_POST
 def toggle_like(request, pk):
     post = get_object_or_404(Post, pk=pk, status=1)
 
     reaction, created = Reaction.objects.get_or_create(user=request.user, post=post)
+    liked = True
     if not created:
         reaction.delete()
+        liked = False
 
-    return redirect("post_detail", slug=post.slug)
+    return JsonResponse({
+        "liked": liked,
+        "total_likes": post.total_likes(),
+    })

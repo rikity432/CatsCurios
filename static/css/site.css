@@ -1,0 +1,39 @@
+body {
+  background: #aa2edbca;
+}
+
+/* Light surface panel so text stays readable on colored backgrounds */
+.page-surface {
+  background: rgba(171, 190, 172, 0.92);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 16px;
+}
+
+/* Subtle modern card polish */
+.card {
+  border-radius: 14px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* Comments: make a readable, contrasted block */
+.comment-card {
+  background: rgba(207, 213, 207, 0.92);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+
+.comment-meta {
+  font-size: 0.85rem;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+/* Prevent stretched avatars */
+.avatar-img {
+  object-fit: cover;
+}

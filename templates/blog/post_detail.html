@@ -20,12 +20,13 @@
 
         <div class="mt-3">
             {% if user.is_authenticated %}
-                <form action="{% url 'toggle_like' post.id %}" method="post" class="d-inline">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-outline-primary btn-sm">
-                        ❤️ Like ({{ post.total_likes }})
-                    </button>
-                </form>
+                <button
+                    type="button"
+                    class="btn btn-outline-primary btn-sm like-btn"
+                    data-like-url="{% url 'toggle_like' post.id %}"
+                    data-post-id="{{ post.id }}">
+                    ❤️ Like (<span id="like-count-{{ post.id }}">{{ post.total_likes }}</span>)
+                </button>
             {% else %}
                 <a class="btn btn-outline-primary btn-sm" href="{% url 'login' %}?next={{ request.path }}">
                     ❤️ Like ({{ post.total_likes }})
@@ -40,18 +41,17 @@
 
     {% if comments %}
         {% for comment in comments %}
-            <div class="border rounded p-2 mb-2">
+            <div class="comment-card p-3 mb-3">
                 <div class="d-flex gap-2">
                     <img
                         src="{{ comment.user|profile_image_url }}"
                         alt="{{ comment.user.username }}"
-                        class="rounded-circle flex-shrink-0"
+                        class="rounded-circle flex-shrink-0 avatar-img"
                         width="40"
                         height="40"
-                        style="object-fit: cover;"
                     />
                     <div class="w-100">
-                        <div class="small text-muted">
+                        <div class="comment-meta">
                             {{ comment.user }} • {{ comment.created_on }}
                         </div>
                         <div>{{ comment.body|linebreaksbr }}</div>
