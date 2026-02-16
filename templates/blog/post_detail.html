@@ -55,6 +55,13 @@
                             {{ comment.user }} • {{ comment.created_on }}
                         </div>
                         <div>{{ comment.body|linebreaksbr }}</div>
+
+                        {% if user == comment.user or user.is_staff %}
+                            <div class="mt-2">
+                                <a href="{% url 'comment_edit' comment.id %}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                                <a href="{% url 'comment_delete' comment.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

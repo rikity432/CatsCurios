@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Delete Comment | Cats Curios{% endblock %}
+
+{% block content %}
+<div class="container col-lg-6 text-center">
+    <h4 class="mb-3">Delete this comment?</h4>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button class="btn btn-danger">Yes, delete</button>
+        <a href="{{ object.post.get_absolute_url }}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

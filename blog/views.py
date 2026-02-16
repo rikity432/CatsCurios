@@ -1,16 +1,18 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpResponseRedirect, JsonResponse
 from django.db.models import Count
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, UpdateView, DeleteView
 from django.views.decorators.http import require_POST
 
 from .forms import CommentForm
-from .models import MOOD_CHOICES, Post, Reaction
+from .models import MOOD_CHOICES, Comment, Post, Reaction
 
 # Create your views here.
+
 
 class PostList(ListView):
     model = Post
@@ -46,7 +48,10 @@ class PostDetail(DetailView):
         context = super().get_context_data(**kwargs)
         post = self.object
 
-        context["comments"] = post.comments.filter(approved=True).select_related("user")
+        context["comments"] = (
+            post.comments.filter(approved=True)
+            .select_related("user")
+        )
         context["comment_form"] = context.get("comment_form") or CommentForm()
         return context
 
@@ -71,12 +76,45 @@ class PostDetail(DetailView):
         return self.render_to_response(context)
 
 
+class CommentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Comment
+    fields = ["body"]
+    template_name = "blog/comment_edit.html"
+
+    def test_func(self):
+        comment = self.get_object()
+        return self.request.user.is_staff or self.request.user == comment.user
+
+    def form_valid(self, form):
+        # Re-require approval after edits (moderation-friendly).
+        form.instance.approved = False
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return self.object.post.get_absolute_url()
+
+
+class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Comment
+    template_name = "blog/comment_delete.html"
+
+    def test_func(self):
+        comment = self.get_object()
+        return self.request.user.is_staff or self.request.user == comment.user
+
+    def get_success_url(self):
+        return self.object.post.get_absolute_url()
+
+
 @login_required
 @require_POST
 def toggle_like(request, pk):
     post = get_object_or_404(Post, pk=pk, status=1)
 
-    reaction, created = Reaction.objects.get_or_create(user=request.user, post=post)
+    reaction, created = Reaction.objects.get_or_create(
+        user=request.user,
+        post=post,
+    )
     liked = True
     if not created:
         reaction.delete()
