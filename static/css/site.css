@@ -2,6 +2,10 @@ html, body {
   height: 100%;
 }
 
+:root {
+  --widget-panel-bg: rgba(230, 214, 214, 0.913);
+}
+
 body {
   background: #aa2edbca;
   display: flex;
@@ -77,6 +81,15 @@ h1, h2, h3, h4, h5, h6,
   margin-right: auto;
 }
 
+.mood-tracker-card {
+  background: var(--widget-panel-bg);
+}
+
+.mood-tracker-card h6 {
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+
 .mood-chart-wrap {
   height: 180px;
 }
@@ -112,7 +125,7 @@ h1, h2, h3, h4, h5, h6,
   bottom: 110px;
   width: 320px;
   height: 420px;
-  background: rgba(255, 255, 255, 0.98);
+  background: var(--widget-panel-bg);
   border-radius: 12px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
   padding: 12px;
