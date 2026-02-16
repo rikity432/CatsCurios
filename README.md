@@ -2,8 +2,8 @@
 
 A playful Django web application documenting the daily adventures of a curious cat through blog-style entries, interactive reactions, and live community features.
 
-Live Site: (Heroku link)
-Repository: (GitHub link)
+Live Site: (https://catscurios-aa2feb00a994.herokuapp.com/)
+Repository: (https://github.com/rikity432/CatsCurios)
 
 📖 Project Overview
 
