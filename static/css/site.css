@@ -1,5 +1,15 @@
+html, body {
+  height: 100%;
+}
+
 body {
   background: #aa2edbca;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-main {
+  flex: 1;
 }
 
 /* Light surface panel so text stays readable on colored backgrounds */
@@ -101,4 +111,8 @@ body {
     left: 10px;
     width: auto;
   }
+}
+
+footer.footer {
+  border-top: 3px solid #ffc107;
 }

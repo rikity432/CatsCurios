@@ -9,6 +9,7 @@ class Profile(models.Model):
 	bio = models.TextField(blank=True)
 	profile_image = CloudinaryField("image", blank=True, null=True)
 	created_on = models.DateTimeField(auto_now_add=True)
+	last_seen = models.DateTimeField(null=True, blank=True)
 
 	def __str__(self):
 		return f"Profile: {self.user}"
