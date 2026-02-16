@@ -11,6 +11,7 @@ from django.views.generic import CreateView, DetailView, UpdateView
 from blog.models import Comment
 
 from .forms import ProfileForm
+from .models import Profile
 
 
 class SignUpView(CreateView):
@@ -59,7 +60,8 @@ class ProfileEditView(LoginRequiredMixin, UpdateView):
 	template_name = "users/profile_edit.html"
 
 	def get_object(self, queryset=None):
-		return self.request.user.profile
+		profile, _created = Profile.objects.get_or_create(user=self.request.user)
+		return profile
 
 	def form_valid(self, form):
 		messages.success(self.request, "Profile updated.")
