@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, JsonResponse
+from django.db.models import Count
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from django.views.generic import DetailView, ListView
@@ -84,4 +85,26 @@ def toggle_like(request, pk):
     return JsonResponse({
         "liked": liked,
         "total_likes": post.total_likes(),
+    })
+
+
+def mood_stats(request):
+    """Return mood distribution for published posts.
+
+    Output is shaped for Chart.js consumption.
+    """
+    data = (
+        Post.objects.filter(status=1)
+        .values("mood")
+        .annotate(total=Count("mood"))
+        .order_by()
+    )
+    mood_counts = {item["mood"]: item["total"] for item in data}
+
+    labels = [label for key, label in MOOD_CHOICES]
+    totals = [mood_counts.get(key, 0) for key, _label in MOOD_CHOICES]
+
+    return JsonResponse({
+        "labels": labels,
+        "totals": totals,
     })

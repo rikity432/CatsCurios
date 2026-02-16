@@ -121,3 +121,12 @@ Authenticated commenting
 Admin-only publishing
 
 Moderated user content
+
+## Features Implemented
+
+- User authentication & profiles
+- Admin moderated comments
+- AJAX like system
+- Mood filtering & pagination
+- Cloudinary image uploads
+- Interactive Mood Analytics Chart (Chart.js + Django API)
