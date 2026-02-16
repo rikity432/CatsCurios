@@ -1,11 +1,12 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from django.shortcuts import redirect
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from django.views.generic import DetailView, ListView
 
 from .forms import CommentForm
-from .models import MOOD_CHOICES, Post
+from .models import MOOD_CHOICES, Post, Reaction
 
 # Create your views here.
 
@@ -36,7 +37,7 @@ class PostDetail(DetailView):
         return (
             Post.objects.filter(status=1)
             .select_related("author")
-            .prefetch_related("comments")
+            .prefetch_related("comments", "reactions")
         )
 
     def get_context_data(self, **kwargs):
@@ -66,3 +67,14 @@ class PostDetail(DetailView):
 
         context = self.get_context_data(comment_form=comment_form)
         return self.render_to_response(context)
+
+
+@login_required
+def toggle_like(request, pk):
+    post = get_object_or_404(Post, pk=pk, status=1)
+
+    reaction, created = Reaction.objects.get_or_create(user=request.user, post=post)
+    if not created:
+        reaction.delete()
+
+    return redirect("post_detail", slug=post.slug)

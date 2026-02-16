@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load profile_extras %}
+
 {% block title %}{{ post.title }} | Cats Curios{% endblock %}
 
 {% block content %}
@@ -15,6 +17,21 @@
         <p class="text-muted">{{ post.created_on }}</p>
         <span class="badge bg-primary mb-3">{{ post.mood }}</span>
         <p>{{ post.content }}</p>
+
+        <div class="mt-3">
+            {% if user.is_authenticated %}
+                <form action="{% url 'toggle_like' post.id %}" method="post" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-primary btn-sm">
+                        ❤️ Like ({{ post.total_likes }})
+                    </button>
+                </form>
+            {% else %}
+                <a class="btn btn-outline-primary btn-sm" href="{% url 'login' %}?next={{ request.path }}">
+                    ❤️ Like ({{ post.total_likes }})
+                </a>
+            {% endif %}
+        </div>
     </div>
 </div>
 
@@ -24,10 +41,22 @@
     {% if comments %}
         {% for comment in comments %}
             <div class="border rounded p-2 mb-2">
-                <div class="small text-muted">
-                    {{ comment.user }} • {{ comment.created_on }}
+                <div class="d-flex gap-2">
+                    <img
+                        src="{{ comment.user|profile_image_url }}"
+                        alt="{{ comment.user.username }}"
+                        class="rounded-circle flex-shrink-0"
+                        width="40"
+                        height="40"
+                        style="object-fit: cover;"
+                    />
+                    <div class="w-100">
+                        <div class="small text-muted">
+                            {{ comment.user }} • {{ comment.created_on }}
+                        </div>
+                        <div>{{ comment.body|linebreaksbr }}</div>
+                    </div>
                 </div>
-                <div>{{ comment.body|linebreaksbr }}</div>
             </div>
         {% endfor %}
     {% else %}
