@@ -29,7 +29,12 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'unsafe-dev-secret-key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['catscurios-aa2feb00a994.herokuapp.com']
+ALLOWED_HOSTS = [
+    'catscurios-aa2feb00a994.herokuapp.com',
+    '127.0.0.1',
+    'localhost',
+    '[::1]',
+]
 
 CLOUDINARY_STORAGE = {
     'CLOUDINARY_URL': os.environ.get('CLOUDINARY_URL')
