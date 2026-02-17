@@ -138,6 +138,9 @@ Notification system
 
 Created as a capstone portfolio project demonstrating Django full-stack development skills.
 
+Background image from: <a href="https://www.freepik.com/free-vector/modern-abstract-dark-violate-pink-background_159480816.htm#fromView=keyword&page=1&position=1&uuid=3eb7d263-64db-414b-93b0-d8ffce92635c&query=Modern+background">Image by muhammad.abdullah on Freepik</a>
+
+
 ```mermaid
 erDiagram
 

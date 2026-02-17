@@ -7,7 +7,12 @@ html, body {
 }
 
 body {
-  background: #aa2edbca;
+  background-color: #aa2edbca;
+  background-image: url("../img/background.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
   display: flex;
   flex-direction: column;
   font-family: "Nunito Sans", system-ui, "Concert One", "Segoe UI", Arial, sans-serif;
@@ -40,7 +45,7 @@ h1, h2, h3, h4, h5, h6,
 
 /* Light surface panel so text stays readable on colored backgrounds */
 .page-surface {
-  background: rgba(171, 190, 172, 0.92);
+  background: rgba(181, 227, 184, 0.726);
   border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 16px;
 }
