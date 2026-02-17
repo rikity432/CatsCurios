@@ -7,7 +7,7 @@
 <div class="home-layout">
 
   <div class="mood-tracker-dock">
-    <div class="card shadow-sm border-0 mood-tracker-card">
+    <div class="card shadow-sm border-0 mood-tracker-card is-collapsed">
       <div class="card-body">
         <div class="widget-header mb-2">
           <h6 class="mb-0">🐾 Cat Mood Tracker</h6>
@@ -16,15 +16,15 @@
             class="btn btn-sm btn-outline-secondary widget-toggle"
             data-widget="mood-tracker"
             aria-controls="mood-tracker-body"
-            aria-expanded="true"
+            aria-expanded="false"
             title="Collapse / expand"
           >
-            <span class="widget-toggle-icon" aria-hidden="true">▾</span>
+            <span class="widget-toggle-icon" aria-hidden="true">▸</span>
             <span class="visually-hidden">Toggle mood tracker</span>
           </button>
         </div>
 
-        <div id="mood-tracker-body" class="mood-tracker-body">
+        <div id="mood-tracker-body" class="mood-tracker-body" hidden>
           <div class="mood-chart-wrap">
             <canvas id="moodChart"></canvas>
           </div>
@@ -99,9 +99,10 @@
         function getCollapsed(widgetName) {
           try {
             const v = window.localStorage.getItem(widgetName === 'mood-tracker' ? MOOD_KEY : CHAT_KEY);
+            if (v === null) return true;
             return v === '1';
           } catch (e) {
-            return false;
+            return true;
           }
         }
 
@@ -192,7 +193,7 @@
 </div>
 
 {% if user.is_authenticated %}
-  <div id="chat-box" class="chat-sidebar" aria-label="Live chat">
+  <div id="chat-box" class="chat-sidebar is-collapsed" aria-label="Live chat">
     <div class="d-flex align-items-center justify-content-between mb-2">
       <strong>Live Chat</strong>
       <div class="d-flex align-items-center gap-2">
@@ -203,16 +204,16 @@
           class="btn btn-sm btn-outline-secondary widget-toggle"
           data-widget="live-chat"
           aria-controls="chat-body"
-          aria-expanded="true"
+          aria-expanded="false"
           title="Collapse / expand"
         >
-          <span class="widget-toggle-icon" aria-hidden="true">▾</span>
+          <span class="widget-toggle-icon" aria-hidden="true">▸</span>
           <span class="visually-hidden">Toggle live chat</span>
         </button>
       </div>
     </div>
 
-    <div id="chat-body" class="chat-body">
+    <div id="chat-body" class="chat-body" hidden>
       <div id="messages" class="chat-messages"></div>
 
       <div class="input-group mt-2">
@@ -240,9 +241,11 @@
 
     function getChatCollapsed() {
       try {
-        return window.localStorage.getItem(CHAT_KEY) === '1';
+        const v = window.localStorage.getItem(CHAT_KEY);
+        if (v === null) return true;
+        return v === '1';
       } catch (e) {
-        return false;
+        return true;
       }
     }
 
