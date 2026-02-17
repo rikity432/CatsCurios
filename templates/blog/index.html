@@ -9,11 +9,27 @@
   <div class="mood-tracker-dock">
     <div class="card shadow-sm border-0 mood-tracker-card">
       <div class="card-body">
-        <h6 class="mb-2">🐾 Cat Mood Tracker</h6>
-        <div class="mood-chart-wrap">
-          <canvas id="moodChart"></canvas>
+        <div class="widget-header mb-2">
+          <h6 class="mb-0">🐾 Cat Mood Tracker</h6>
+          <button
+            type="button"
+            class="btn btn-sm btn-outline-secondary widget-toggle"
+            data-widget="mood-tracker"
+            aria-controls="mood-tracker-body"
+            aria-expanded="true"
+            title="Collapse / expand"
+          >
+            <span class="widget-toggle-icon" aria-hidden="true">▾</span>
+            <span class="visually-hidden">Toggle mood tracker</span>
+          </button>
         </div>
-        <div class="small text-muted mt-2">Based on published posts</div>
+
+        <div id="mood-tracker-body" class="mood-tracker-body">
+          <div class="mood-chart-wrap">
+            <canvas id="moodChart"></canvas>
+          </div>
+          <div class="small text-muted mt-2">Based on published posts</div>
+        </div>
       </div>
     </div>
   </div>
@@ -66,13 +82,51 @@
 
       <script>
       document.addEventListener('DOMContentLoaded', () => {
-        const canvas = document.getElementById('moodChart');
-        if (!canvas || typeof Chart === 'undefined') return;
+        const MOOD_KEY = 'catscurios:widgets:mood_tracker_collapsed';
+        const CHAT_KEY = 'catscurios:widgets:live_chat_collapsed';
 
-        fetch('{% url "mood_stats" %}')
-          .then((response) => response.json())
-          .then((data) => {
-            new Chart(canvas, {
+        function setCollapsed(widgetName, collapsed) {
+          try {
+            window.localStorage.setItem(
+              widgetName === 'mood-tracker' ? MOOD_KEY : CHAT_KEY,
+              collapsed ? '1' : '0'
+            );
+          } catch (e) {
+            // ignore
+          }
+        }
+
+        function getCollapsed(widgetName) {
+          try {
+            const v = window.localStorage.getItem(widgetName === 'mood-tracker' ? MOOD_KEY : CHAT_KEY);
+            return v === '1';
+          } catch (e) {
+            return false;
+          }
+        }
+
+        function applyCollapsedState(container, bodyEl, toggleBtn, collapsed) {
+          if (!container || !bodyEl || !toggleBtn) return;
+          container.classList.toggle('is-collapsed', collapsed);
+          bodyEl.hidden = collapsed;
+          toggleBtn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+          const icon = toggleBtn.querySelector('.widget-toggle-icon');
+          if (icon) icon.textContent = collapsed ? '▸' : '▾';
+        }
+
+        // Mood chart (init only when visible)
+        let moodChartInstance = null;
+        async function initMoodChart() {
+          if (moodChartInstance) return;
+          const canvas = document.getElementById('moodChart');
+          if (!canvas || typeof Chart === 'undefined') return;
+
+          try {
+            const response = await fetch('{% url "mood_stats" %}');
+            if (!response.ok) return;
+            const data = await response.json();
+
+            moodChartInstance = new Chart(canvas, {
               type: 'bar',
               data: {
                 labels: data.labels,
@@ -89,9 +143,7 @@
               options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: {
-                  legend: { display: false },
-                },
+                plugins: { legend: { display: false } },
                 indexAxis: 'y',
                 scales: {
                   y: { beginAtZero: true, ticks: { precision: 0 } },
@@ -99,8 +151,39 @@
                 },
               },
             });
-          })
-          .catch(() => {});
+          } catch (e) {
+            // ignore
+          }
+        }
+
+        // Wire up generic widget toggles
+        document.querySelectorAll('.widget-toggle[data-widget]').forEach((btn) => {
+          const widgetName = btn.dataset.widget;
+
+          if (widgetName === 'mood-tracker') {
+            const container = document.querySelector('.mood-tracker-card');
+            const bodyEl = document.getElementById('mood-tracker-body');
+            const collapsed = getCollapsed(widgetName);
+            applyCollapsedState(container, bodyEl, btn, collapsed);
+            if (!collapsed) initMoodChart();
+
+            btn.addEventListener('click', () => {
+              const nextCollapsed = !container.classList.contains('is-collapsed');
+              applyCollapsedState(container, bodyEl, btn, nextCollapsed);
+              setCollapsed(widgetName, nextCollapsed);
+              if (!nextCollapsed) initMoodChart();
+            });
+          }
+        });
+
+        // Chat widget collapse wiring (only if present)
+        const chatBox = document.getElementById('chat-box');
+        const chatBody = document.getElementById('chat-body');
+        const chatToggle = document.getElementById('chat-toggle');
+        if (chatBox && chatBody && chatToggle) {
+          const collapsed = getCollapsed('live-chat');
+          applyCollapsedState(chatBox, chatBody, chatToggle, collapsed);
+        }
       });
       </script>
 
@@ -112,27 +195,72 @@
   <div id="chat-box" class="chat-sidebar" aria-label="Live chat">
     <div class="d-flex align-items-center justify-content-between mb-2">
       <strong>Live Chat</strong>
-      <span class="badge bg-secondary">beta</span>
+      <div class="d-flex align-items-center gap-2">
+        <span class="badge bg-secondary">beta</span>
+        <button
+          type="button"
+          id="chat-toggle"
+          class="btn btn-sm btn-outline-secondary widget-toggle"
+          data-widget="live-chat"
+          aria-controls="chat-body"
+          aria-expanded="true"
+          title="Collapse / expand"
+        >
+          <span class="widget-toggle-icon" aria-hidden="true">▾</span>
+          <span class="visually-hidden">Toggle live chat</span>
+        </button>
+      </div>
     </div>
-    <div id="messages" class="chat-messages"></div>
 
-    <div class="input-group mt-2">
-      <input id="chat-input" class="form-control form-control-sm" placeholder="Say something..." maxlength="300" />
-      <button id="chat-send" class="btn btn-primary btn-sm" type="button">Send</button>
+    <div id="chat-body" class="chat-body">
+      <div id="messages" class="chat-messages"></div>
+
+      <div class="input-group mt-2">
+        <input id="chat-input" class="form-control form-control-sm" placeholder="Say something..." maxlength="300" />
+        <button id="chat-send" class="btn btn-primary btn-sm" type="button">Send</button>
+      </div>
+      <div class="small text-muted mt-1">Filtered + last 20 messages</div>
     </div>
-    <div class="small text-muted mt-1">Filtered + last 20 messages</div>
   </div>
 
   <script>
   (function () {
+    const CHAT_KEY = 'catscurios:widgets:live_chat_collapsed';
     const messagesUrl = '/chat/messages/';
     const sendUrl = '/chat/send/';
 
+    const chatBox = document.getElementById('chat-box');
+    const chatBody = document.getElementById('chat-body');
+    const chatToggle = document.getElementById('chat-toggle');
     const box = document.getElementById('messages');
     const input = document.getElementById('chat-input');
     const sendBtn = document.getElementById('chat-send');
 
-    if (!box || !input || !sendBtn) return;
+    if (!box || !input || !sendBtn || !chatBox || !chatBody || !chatToggle) return;
+
+    function getChatCollapsed() {
+      try {
+        return window.localStorage.getItem(CHAT_KEY) === '1';
+      } catch (e) {
+        return false;
+      }
+    }
+
+    function setChatCollapsed(collapsed) {
+      try {
+        window.localStorage.setItem(CHAT_KEY, collapsed ? '1' : '0');
+      } catch (e) {
+        // ignore
+      }
+    }
+
+    function applyChatCollapsed(collapsed) {
+      chatBox.classList.toggle('is-collapsed', collapsed);
+      chatBody.hidden = collapsed;
+      chatToggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+      const icon = chatToggle.querySelector('.widget-toggle-icon');
+      if (icon) icon.textContent = collapsed ? '▸' : '▾';
+    }
 
     function escapeHtml(str) {
       return String(str)
@@ -145,6 +273,7 @@
 
     async function loadMessages() {
       try {
+        if (getChatCollapsed()) return;
         const r = await fetch(messagesUrl, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
         if (!r.ok) return;
         const data = await r.json();
@@ -192,8 +321,34 @@
       if (e.key === 'Enter') sendMessage();
     });
 
-    loadMessages();
-    setInterval(loadMessages, 3000);
+    let pollId = null;
+    function startPolling() {
+      if (pollId) return;
+      loadMessages();
+      pollId = setInterval(loadMessages, 3000);
+    }
+
+    function stopPolling() {
+      if (!pollId) return;
+      clearInterval(pollId);
+      pollId = null;
+    }
+
+    // Init collapsed state + polling
+    const initiallyCollapsed = getChatCollapsed();
+    applyChatCollapsed(initiallyCollapsed);
+    if (!initiallyCollapsed) startPolling();
+
+    chatToggle.addEventListener('click', () => {
+      const nextCollapsed = !chatBox.classList.contains('is-collapsed');
+      applyChatCollapsed(nextCollapsed);
+      setChatCollapsed(nextCollapsed);
+      if (nextCollapsed) {
+        stopPolling();
+      } else {
+        startPolling();
+      }
+    });
   })();
   </script>
 {% endif %}

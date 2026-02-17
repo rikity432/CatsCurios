@@ -90,6 +90,37 @@ h1, h2, h3, h4, h5, h6,
   line-height: 1.2;
 }
 
+.widget-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.widget-toggle {
+  line-height: 1;
+  padding: 0.25rem 0.5rem;
+}
+
+/* Collapsed widget state */
+.mood-tracker-card.is-collapsed .mood-tracker-body {
+  display: none;
+}
+
+.chat-sidebar.is-collapsed {
+  height: 56px;
+}
+
+@media (max-width: 991.98px) {
+  .chat-sidebar.is-collapsed {
+    height: auto;
+  }
+}
+
+.chat-sidebar.is-collapsed .chat-body {
+  display: none;
+}
+
 .mood-chart-wrap {
   height: 180px;
 }
