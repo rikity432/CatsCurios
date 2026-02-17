@@ -7,7 +7,6 @@ html, body {
 }
 
 body {
-  background-color: #aa2edbca;
   background-image: url("../img/background.jpg");
   background-position: center;
   background-repeat: no-repeat;
@@ -15,7 +14,7 @@ body {
   background-attachment: fixed;
   display: flex;
   flex-direction: column;
-  font-family: "Nunito Sans", system-ui, "Concert One", "Segoe UI", Arial, sans-serif;
+  font-family: "Nunito Sans", "Concert One", Arial, sans-serif;
 }
 
 /* Utility classes (matches Google Fonts examples) */
