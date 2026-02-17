@@ -4,6 +4,13 @@ from django.core.exceptions import ValidationError
 from .models import Profile
 
 
+class FriendlyClearableImageInput(forms.ClearableFileInput):
+    template_name = "widgets/profile_clearable_image_input.html"
+    initial_text = "Current photo"
+    input_text = "Choose a new photo"
+    clear_checkbox_label = "Remove current photo"
+
+
 class ProfileForm(forms.ModelForm):
     MAX_BIO_CHARS = 500
     MAX_IMAGE_BYTES = 2 * 1024 * 1024  # 2MB
@@ -37,6 +44,16 @@ class ProfileForm(forms.ModelForm):
             "bio": "Max 500 characters.",
             "profile_image": "Optional. JPG/PNG/WEBP recommended (max 2MB).",
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Use a friendlier widget rendering for CloudinaryField uploads.
+        self.fields["profile_image"].widget = FriendlyClearableImageInput(
+            attrs={
+                "accept": "image/*",
+            }
+        )
 
     def clean_location(self):
         location = (self.cleaned_data.get("location") or "").strip()
