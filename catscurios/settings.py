@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 from pathlib import Path
 import dj_database_url
 import os
+import cloudinary
 if os.path.exists('env.py'):
     import env
 
@@ -37,8 +38,13 @@ ALLOWED_HOSTS = [
 ]
 
 CLOUDINARY_STORAGE = {
-    'CLOUDINARY_URL': os.environ.get('CLOUDINARY_URL')
+    'CLOUDINARY_URL': os.environ.get('CLOUDINARY_URL'),
+    # Ensure generated asset URLs use https://res.cloudinary.com/...
+    'SECURE': True,
 }
+
+# Also enforce secure URL generation at the Cloudinary SDK level.
+cloudinary.config(secure=True)
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
