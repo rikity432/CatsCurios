@@ -80,7 +80,7 @@
         </div>
       {% endfor %}
 
-      <script>
+      <script nonce="{{ csp_nonce }}">
       document.addEventListener('DOMContentLoaded', () => {
         const MOOD_KEY = 'catscurios:widgets:mood_tracker_collapsed';
         const CHAT_KEY = 'catscurios:widgets:live_chat_collapsed';
@@ -224,7 +224,7 @@
     </div>
   </div>
 
-  <script>
+  <script nonce="{{ csp_nonce }}">
   (function () {
     const CHAT_KEY = 'catscurios:widgets:live_chat_collapsed';
     const messagesUrl = '/chat/messages/';
