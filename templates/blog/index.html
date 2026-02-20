@@ -30,7 +30,7 @@
           <div class="mood-chart-wrap">
             <canvas id="moodChart"></canvas>
           </div>
-          <div class="small text-muted mt-2">Based on published posts</div>
+          <div class="small text-muted mt-2 mood-tracker-note">Based on published posts</div>
         </div>
       </div>
     </div>
@@ -124,6 +124,13 @@
           const canvas = document.getElementById('moodChart');
           if (!canvas || typeof Chart === 'undefined') return;
 
+          const brandPurple = (getComputedStyle(document.documentElement)
+            .getPropertyValue('--brand-purple')
+            .trim() || '#b62eff');
+          const brandPurpleFill = (brandPurple.startsWith('#') && brandPurple.length === 7)
+            ? (brandPurple + 'A6')
+            : 'rgba(182, 46, 255, 0.65)';
+
           try {
             const response = await fetch('{% url "mood_stats" %}');
             if (!response.ok) return;
@@ -137,8 +144,8 @@
                   {
                     label: 'Number of Posts',
                     data: data.totals,
-                    backgroundColor: 'rgba(13, 110, 253, 0.65)',
-                    borderColor: 'rgba(13, 110, 253, 1)',
+                    backgroundColor: brandPurpleFill,
+                    borderColor: brandPurple,
                     borderWidth: 1,
                   },
                 ],
@@ -149,8 +156,16 @@
                 plugins: { legend: { display: false } },
                 indexAxis: 'y',
                 scales: {
-                  y: { beginAtZero: true, ticks: { precision: 0 } },
-                  x: { beginAtZero: true, ticks: { precision: 0 } },
+                  y: {
+                    beginAtZero: true,
+                    ticks: { precision: 0, color: '#ffffff' },
+                    grid: { color: 'rgba(255, 255, 255, 0.12)' },
+                  },
+                  x: {
+                    beginAtZero: true,
+                    ticks: { precision: 0, color: '#ffffff' },
+                    grid: { color: 'rgba(255, 255, 255, 0.12)' },
+                  },
                 },
               },
             });

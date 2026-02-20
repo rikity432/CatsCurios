@@ -126,6 +126,11 @@ h1, h2, h3, h4, h5, h6,
   line-height: 1.2;
 }
 
+.mood-tracker-note {
+  color: var(--brand-purple) !important;
+  opacity: 0.9;
+}
+
 .widget-header {
   display: flex;
   align-items: center;
@@ -193,6 +198,8 @@ h1, h2, h3, h4, h5, h6,
   width: 320px;
   height: 420px;
   background: var(--widget-panel-bg);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 12px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
   padding: 12px;
@@ -200,11 +207,71 @@ h1, h2, h3, h4, h5, h6,
   z-index: 20;
 }
 
+/* Make Bootstrap muted text readable inside the dark chat widget */
+.chat-sidebar .text-muted {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+.chat-sidebar a {
+  color: #ffffff;
+}
+
+.chat-sidebar a:hover,
+.chat-sidebar a:focus {
+  color: #ffffff;
+}
+
 .chat-messages {
   height: 310px;
   overflow-y: auto;
   font-size: 14px;
   padding-right: 6px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 8px;
+}
+
+.chat-messages p {
+  color: #ffffff;
+}
+
+.chat-messages strong {
+  color: var(--brand-purple);
+}
+
+/* Theme the input and buttons for dark backgrounds */
+.chat-sidebar .form-control {
+  background: rgba(255, 255, 255, 0.10);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.20);
+}
+
+.chat-sidebar .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.70);
+}
+
+.chat-sidebar .btn-primary {
+  background-color: var(--brand-purple);
+  border-color: var(--brand-purple);
+}
+
+.chat-sidebar .btn-primary:hover,
+.chat-sidebar .btn-primary:focus {
+  background-color: #d05bff;
+  border-color: #d05bff;
+}
+
+.chat-sidebar .btn-outline-secondary {
+  color: rgba(255, 255, 255, 0.90);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.chat-sidebar .btn-outline-secondary:hover,
+.chat-sidebar .btn-outline-secondary:focus {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.10);
+  border-color: rgba(255, 255, 255, 0.50);
 }
 
 /* On smaller screens, keep chat in normal flow so it never overlays posts */
