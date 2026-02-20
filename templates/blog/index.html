@@ -12,7 +12,7 @@
     <div class="card shadow-sm border-0 mood-tracker-card is-collapsed">
       <div class="card-body">
         <div class="widget-header mb-2">
-          <h6 class="mb-0">🐾 Cat Mood Tracker</h6>
+          <div class="h6 mb-0">🐾 Cat Mood Tracker</div>
           <button
             type="button"
             class="btn btn-sm btn-outline-secondary widget-toggle"
@@ -71,11 +71,11 @@
             <img src="{{ post.image.url }}" class="card-img-top" alt="{{ post.title }}">
           {% endif %}
           <div class="card-body">
-            <h5 class="card-title mb-2">
+            <h2 class="h5 card-title mb-2">
               <a href="{% url 'post_detail' post.slug %}" class="text-decoration-none">
                 {{ post.title }}
               </a>
-            </h5>
+            </h2>
             <p class="card-text">{{ post.excerpt }}</p>
             <span class="badge bg-primary">{{ post.mood }}</span>
           </div>

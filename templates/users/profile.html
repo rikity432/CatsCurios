@@ -15,7 +15,7 @@
                     </div>
                 {% endif %}
 
-                <h3 class="mb-1">{{ profile_user.username }}</h3>
+                <h1 class="h3 mb-1">{{ profile_user.username }}</h1>
                 <div class="text-muted">Joined {{ profile_user.date_joined|date:"F j, Y" }}</div>
 
                 {% if profile and profile.location %}
@@ -36,7 +36,7 @@
     </div>
 
     <div class="col-md-8 mt-3 mt-md-0">
-        <h4>Recent comments</h4>
+        <h2 class="h4">Recent comments</h2>
         {% if recent_comments %}
             {% for comment in recent_comments %}
                 <div class="border rounded p-2 mb-2">

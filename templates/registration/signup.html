@@ -4,7 +4,7 @@
 {% block title %}Register | Cats Curios{% endblock %}
 
 {% block content %}
-<h2>Create account</h2>
+<h1 class="h2">Create account</h1>
 <form method="post" class="mt-3" novalidate>
     {% csrf_token %}
     {% if request.GET.next %}
