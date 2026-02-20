@@ -166,7 +166,7 @@ Static files collected via WhiteNoise
 
 🧪 Testing
 
-Manual testing performed across:
+Manual testing performed with Dev tools and inbuilt Lighthouse, HTML validator with https://validator.w3.org/ CSS validation with https://jigsaw.w3.org/css-validator/ across:
 
 Authentication flows
 
@@ -178,7 +178,7 @@ Mobile responsiveness
 
 🔮 Future Improvements
 
-WebSocket real-time chat
+WebSocket real-time chat (implemented!)
 
 Follow favourite users
 
@@ -186,10 +186,17 @@ Cat achievement badges
 
 Notification system
 
+Cat location tracker
+
 👨‍💻 Author
 
 Created as a capstone portfolio project demonstrating Django full-stack development skills.
 
+Source credits:
+
 Background image from: <a href="https://www.freepik.com/free-vector/modern-abstract-dark-violate-pink-background_159480816.htm#fromView=keyword&page=1&position=1&uuid=3eb7d263-64db-414b-93b0-d8ffce92635c&query=Modern+background">Image by muhammad.abdullah on Freepik</a>
 
+Favicon from: https://www.favicon.cc/?action=icon&file_id=1020267
+
+Blog post images created with Google Gemini image creator "Nano Banana Pro": https://gemini.google/overview/image-generation/
 
