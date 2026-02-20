@@ -42,7 +42,7 @@ class ContentSecurityPolicyMiddleware:
             "https://fonts.googleapis.com https://cdnjs.cloudflare.com; "
             f"script-src 'self' 'nonce-{nonce}' https://cdn.jsdelivr.net "
             "https://cdnjs.cloudflare.com; "
-            "connect-src 'self'; "
+            "connect-src 'self' https://cdn.jsdelivr.net; "
             "upgrade-insecure-requests"
         )
 
