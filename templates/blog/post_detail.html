@@ -12,7 +12,14 @@
 
 <div class="card">
     {% if post.image %}
-        <img src="{{ post.image.url }}" class="card-img-top">
+                <img
+                    src="{{ post.image.url }}"
+                    class="card-img-top"
+                    alt="{{ post.title }}"
+                    fetchpriority="high"
+                    loading="eager"
+                    decoding="async"
+                >
     {% endif %}
     <div class="card-body">
         <h1 class="h2">{{ post.title }}</h1>

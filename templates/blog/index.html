@@ -69,7 +69,13 @@
         <div class="card shadow-sm mb-4 border-0">
           {% if post.image %}
             <a href="{% url 'post_detail' post.slug %}" class="text-decoration-none">
-              <img src="{{ post.image.url }}" class="card-img-top" alt="{{ post.title }}">
+              <img
+                src="{{ post.image.url }}"
+                class="card-img-top"
+                alt="{{ post.title }}"
+                decoding="async"
+                {% if forloop.first %}fetchpriority="high" loading="eager"{% else %}loading="lazy"{% endif %}
+              >
             </a>
           {% endif %}
           <div class="card-body">
@@ -286,31 +292,32 @@
       if (icon) icon.textContent = collapsed ? '▸' : '▾';
     }
 
-    function escapeHtml(str) {
-      return String(str)
-        .replaceAll('&', '&amp;')
-        .replaceAll('<', '&lt;')
-        .replaceAll('>', '&gt;')
-        .replaceAll('"', '&quot;')
-        .replaceAll("'", '&#039;');
-    }
-
     async function loadMessages() {
       try {
         if (getChatCollapsed()) return;
         const r = await fetch(messagesUrl, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
         if (!r.ok) return;
         const data = await r.json();
-        box.innerHTML = '';
 
+        const frag = document.createDocumentFragment();
         data.forEach((m) => {
           const p = document.createElement('p');
           p.className = 'mb-1';
-          p.innerHTML = `<strong>${escapeHtml(m.user)}:</strong> ${escapeHtml(m.message)}`;
-          box.appendChild(p);
+
+          const strong = document.createElement('strong');
+          strong.textContent = `${m.user}:`;
+
+          p.appendChild(strong);
+          p.appendChild(document.createTextNode(` ${m.message}`));
+          frag.appendChild(p);
         });
 
-        box.scrollTop = box.scrollHeight;
+        box.replaceChildren(frag);
+
+        // Defer scrollHeight read/write to avoid forced reflow in this task.
+        requestAnimationFrame(() => {
+          box.scrollTop = box.scrollHeight;
+        });
       } catch (e) {
         // ignore
       }
