@@ -16,10 +16,10 @@
                 {% endif %}
 
                 <h1 class="h3 mb-1">{{ profile_user.username }}</h1>
-                <div class="text-muted">Joined {{ profile_user.date_joined|date:"F j, Y" }}</div>
+                <div class="text-muted profile-meta">Joined {{ profile_user.date_joined|date:"F j, Y" }}</div>
 
                 {% if profile and profile.location %}
-                    <div class="text-muted small mt-1">📍 {{ profile.location }}</div>
+                    <div class="text-muted small mt-1 profile-meta">📍 {{ profile.location }}</div>
                 {% endif %}
 
                 {% if profile and profile.bio %}
