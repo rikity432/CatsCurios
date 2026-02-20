@@ -4,6 +4,8 @@
 
 {% block title %}{{ post.title }} | Cats Curios{% endblock %}
 
+{% block meta_description %}{{ post.excerpt|default:post.content|striptags|truncatechars:160 }}{% endblock %}
+
 {% block content %}
 
 <a href="{% url 'home' %}" class="btn btn-secondary mb-3">← Back</a>
