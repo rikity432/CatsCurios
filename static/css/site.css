@@ -73,6 +73,18 @@ h1, h2, h3, h4, h5, h6,
   border-color: #a61fe6;
 }
 
+/* Auth pages (login/register): keep forms from stretching too wide */
+.auth-form {
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Navbar: keep inline logout form compact */
+.navbar .nav-item form.d-inline-flex {
+  width: auto;
+}
+
 /* Subtle modern card polish */
 .card {
   border-radius: 14px;
