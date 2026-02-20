@@ -3,7 +3,8 @@ html, body {
 }
 
 :root {
-  --widget-panel-bg: rgba(230, 214, 214, 0.913);
+  --widget-panel-bg: rgba(55, 39, 58, 0.913);
+  --brand-purple: #b62eff;
 }
 
 body {
@@ -52,6 +53,38 @@ h1, h2, h3, h4, h5, h6,
 .card {
   border-radius: 14px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background-color: rgb(50, 50, 50);
+  font-size: 1.35rem;
+  color: var(--brand-purple);
+}
+
+/* Blog index: card title link should not be Bootstrap blue */
+.posts-centered .card-title a {
+  color: var(--brand-purple) !important;
+}
+
+.posts-centered .card-title a:hover,
+.posts-centered .card-title a:focus {
+  color: #d05bff !important;
+  text-decoration: underline;
+}
+
+/* Blog index: increase excerpt text size */
+.posts-centered .card-text {
+  font-size: 1.5rem;
+  line-height: 1.65;
+}
+
+/* Post detail: override Bootstrap muted timestamp */
+.post-timestamp {
+  color: var(--brand-purple) !important;
+  opacity: 0.9;
+}
+
+/* Post detail: increase body text size */
+.post-content {
+  font-size: 1.6rem;
+  line-height: 1.7;
 }
 
 .card:hover {
