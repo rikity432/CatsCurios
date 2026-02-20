@@ -49,6 +49,30 @@ h1, h2, h3, h4, h5, h6,
   border-radius: 16px;
 }
 
+/* Navbar */
+.current-status-badge {
+  background: var(--brand-purple) !important;
+  color: #ffffff !important;
+}
+
+.btn-brand-purple {
+  background: var(--brand-purple);
+  border-color: var(--brand-purple);
+  color: #ffffff;
+}
+
+.btn-brand-purple:hover,
+.btn-brand-purple:focus {
+  background: #d05bff;
+  border-color: #d05bff;
+  color: #ffffff;
+}
+
+.btn-brand-purple:active {
+  background: #a61fe6;
+  border-color: #a61fe6;
+}
+
 /* Subtle modern card polish */
 .card {
   border-radius: 14px;
