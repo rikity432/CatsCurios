@@ -202,11 +202,12 @@ h1, h2, h3, h4, h5, h6,
 
 .mood-tracker-card .h6 {
   font-size: 1.25rem;
+  color: white
   line-height: 1.2;
 }
 
 .mood-tracker-note {
-  color: var(--brand-purple) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
   opacity: 0.9;
 }
 
