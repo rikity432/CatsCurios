@@ -68,7 +68,9 @@
       {% for post in posts %}
         <div class="card shadow-sm mb-4 border-0">
           {% if post.image %}
-            <img src="{{ post.image.url }}" class="card-img-top" alt="{{ post.title }}">
+            <a href="{% url 'post_detail' post.slug %}" class="text-decoration-none">
+              <img src="{{ post.image.url }}" class="card-img-top" alt="{{ post.title }}">
+            </a>
           {% endif %}
           <div class="card-body">
             <h2 class="h5 card-title mb-2">
