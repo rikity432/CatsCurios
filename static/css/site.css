@@ -57,20 +57,20 @@ h1, h2, h3, h4, h5, h6,
 
 .btn-brand-purple {
   background: var(--brand-purple);
-  border-color: var(--brand-purple);
+  border-color: #a21cf0;
   color: #ffffff;
 }
 
 .btn-brand-purple:hover,
 .btn-brand-purple:focus {
   background: #d05bff;
-  border-color: #d05bff;
+  border-color: #c84df7;
   color: #ffffff;
 }
 
 .btn-brand-purple:active {
   background: #a61fe6;
-  border-color: #a61fe6;
+  border-color: #9216cc;
 }
 
 /* Auth pages (login/register): keep forms from stretching too wide */
@@ -333,13 +333,13 @@ h1, h2, h3, h4, h5, h6,
 
 .chat-sidebar .btn-primary {
   background-color: var(--brand-purple);
-  border-color: var(--brand-purple);
+  border-color: #a21cf0;
 }
 
 .chat-sidebar .btn-primary:hover,
 .chat-sidebar .btn-primary:focus {
   background-color: #d05bff;
-  border-color: #d05bff;
+  border-color: #c84df7;
 }
 
 .chat-sidebar .btn-outline-secondary {
