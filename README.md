@@ -19,8 +19,7 @@ Repository: https://github.com/rikity432/CatsCurios
 - [Author](#author)
 - [Source Credits](#source-credits)
 
-<a id="project-overview"></a>
-## 📖 Project Overview
+## Project Overview
 
 Cats Curios is a full-stack Django application built as a final capstone project during a 16-week programming skills bootcamp.
 
@@ -28,9 +27,7 @@ The platform allows users to follow a fictional cat’s daily experiences, inter
 
 The project demonstrates modern full-stack development practices including authentication, database design, AJAX interactions, and deployment.
 
-<a id="project-goals"></a>
-## 🎯 Project Goals
-
+## Project Goals
 
 - Build a full CRUD Django application
 - Implement authentication & user profiles
@@ -38,74 +35,53 @@ The project demonstrates modern full-stack development practices including authe
 - Use AJAX for dynamic UI updates
 - Deploy a production-ready application
 
-<a id="features"></a>
-## ✨ Features
+## Features
 
 ### Core Features
 
-Admin-created blog posts
-
-User registration & login
-
-User profiles with images
-
-Comment system with admin approval
-
-Mood filtering & pagination
+- Admin-created blog posts
+- User registration & login
+- User profiles with images
+- Comment system with admin approval
+- Mood filtering & pagination
 
 ### Interactive Features
 
-AJAX like/reaction system
+- AJAX like/reaction system
+- Live chat with profanity filtering
+- Cat status indicator (dynamic navbar)
+- Online users tracker
+- Mood analytics chart (Chart.js)
 
-Live chat with profanity filtering
-
-Cat status indicator (dynamic navbar)
-
-Online users tracker
-
-Mood analytics chart (Chart.js)
-
-<a id="technology-stack"></a>
-## 🧱 Technology Stack
+## Technology Stack
 
 ### Frontend
 
-HTML5
-
-CSS3
-
-Bootstrap
-
-JavaScript (AJAX)
-
-Chart.js
+- HTML5
+- CSS3
+- Bootstrap
+- JavaScript (AJAX)
+- Chart.js
 
 ### Backend
 
-Python
-
-Django
-
-PostgreSQL
+- Python
+- Django
+- PostgreSQL
 
 ### Deployment & Tools
 
-Heroku
+- Heroku
+- Cloudinary
+- GitHub
+- Crispy Forms
 
-Cloudinary
-
-GitHub
-
-Crispy Forms
-
-<a id="database-design"></a>
-## 🗄 Database Design
+## Database Design
 
 ### Entity Relationship Diagram
 
 ```mermaid
 erDiagram
-
     User ||--|| Profile : has
     User ||--o{ Comment : writes
     User ||--o{ Reaction : likes
@@ -128,8 +104,7 @@ erDiagram
         string profile_image
         datetime last_seen
     }
-    <a id="agile-development"></a>
-    ## 🧠 Agile Development
+
     Post {
         int id PK
         string title
@@ -137,8 +112,7 @@ erDiagram
         string mood
         image featured_image
         datetime created_on
-    <a id="deployment"></a>
-    ## 🚀 Deployment
+        boolean approved
     }
 
     Comment {
@@ -150,10 +124,9 @@ erDiagram
         datetime created_on
     }
 
-    <a id="testing"></a>
-    ## 🧪 Testing
+    Reaction {
         int id PK
-    Manual testing performed with Dev tools and inbuilt Lighthouse, HTML validator (https://validator.w3.org/) and CSS validation (https://jigsaw.w3.org/css-validator/) across:
+        int user_id FK
         int post_id FK
         datetime created_on
     }
@@ -162,76 +135,63 @@ erDiagram
         int id PK
         int user_id FK
         text message
-
-    ### Validator & Lighthouse Results
-
-    ![HTML Validation](<docs/testing/images/html validation.png>)
-    ![CSS Validation](<docs/testing/images/css validation.png>)
-    ![Lighthouse Report 1](docs/testing/images/LH1.png)
-    ![Lighthouse Report 2](docs/testing/images/LH2.png)
-
-    ### Wireframes
-
-    ![Wireframes](docs/wireframes/wireframes.png)
-    ![Mobile Wireframe](<docs/wireframes/wireframe mobile.png>)
-    ![Blog Post Mobile Wireframe](<docs/wireframes/blog post mobile.png>)
         datetime created_at
-    <a id="future-improvements"></a>
-    ## 🔮 Future Improvements
+    }
 ```
 
-🧠 Agile Development
+## Agile Development
 
 Project planning followed Agile principles:
 
-User stories tracked via GitHub Projects
+- User stories tracked via GitHub Projects
+- Iterative feature delivery
 
-Iterative feature delivery
+## Deployment
 
-🚀 Deployment
-    <a id="author"></a>
-    ## 👨‍💻 Author
 Application deployed using Heroku:
 
-PostgreSQL database configured
-    <a id="source-credits"></a>
-    ## Source Credits
-Cloudinary media storage enabled
+- PostgreSQL database configured
+- Cloudinary media storage enabled
+- Environment variables secured
+- Static files collected via WhiteNoise
 
-Environment variables secured
+## Testing
 
-Static files collected via WhiteNoise
+Manual testing performed with DevTools and inbuilt Lighthouse, HTML validator (https://validator.w3.org/) and CSS validation (https://jigsaw.w3.org/css-validator/) across:
 
+- Authentication flows
+- Comment moderation
+- AJAX interactions
+- Mobile responsiveness
 
-Authentication flows
+### Validator & Lighthouse Results
 
-Comment moderation
+![HTML Validation](docs/testing/images/html%20validation.png)
+![CSS Validation](docs/testing/images/css%20validation.png)
+![Lighthouse Report 1](docs/testing/images/LH1.png)
+![Lighthouse Report 2](docs/testing/images/LH2.png)
 
-AJAX interactions
+### Wireframes
 
-Mobile responsiveness
+![Wireframes](docs/wireframes/wireframes.png)
+![Mobile Wireframe](docs/wireframes/wireframe%20mobile.png)
+![Blog Post Mobile Wireframe](docs/wireframes/blog%20post%20mobile.png)
 
-🔮 Future Improvements
+## Future Improvements
 
-WebSocket real-time chat (implemented!)
+- WebSocket real-time chat (implemented!)
+- Follow favourite users
+- Cat achievement badges
+- Notification system
+- Cat location tracker
 
-Follow favourite users
-
-Cat achievement badges
-
-Notification system
-
-Cat location tracker
-
-👨‍💻 Author
+## Author
 
 Created as a capstone portfolio project demonstrating Django full-stack development skills.
 
-Source credits:
+## Source Credits
 
-Background image from: <a href="https://www.freepik.com/free-vector/modern-abstract-dark-violate-pink-background_159480816.htm#fromView=keyword&page=1&position=1&uuid=3eb7d263-64db-414b-93b0-d8ffce92635c&query=Modern+background">Image by muhammad.abdullah on Freepik</a>
-
-Favicon from: https://www.favicon.cc/?action=icon&file_id=1020267
-
-Blog post images created with Google Gemini image creator "Nano Banana Pro": https://gemini.google/overview/image-generation/
+- Background image from: <a href="https://www.freepik.com/free-vector/modern-abstract-dark-violate-pink-background_159480816.htm#fromView=keyword&page=1&position=1&uuid=3eb7d263-64db-414b-93b0-d8ffce92635c&query=Modern+background">Image by muhammad.abdullah on Freepik</a>
+- Favicon from: https://www.favicon.cc/?action=icon&file_id=1020267
+- Blog post images created with Google Gemini image creator "Nano Banana Pro": https://gemini.google/overview/image-generation/
 
