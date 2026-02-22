@@ -39,10 +39,10 @@ class ContentSecurityPolicyMiddleware:
             "font-src 'self' data: https://fonts.gstatic.com "
             "https://cdnjs.cloudflare.com https://ka-f.fontawesome.com; "
             "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net "
-            "https://fonts.googleapis.com https://cdnjs.cloudflare.com; "
+            "https://fonts.googleapis.com https://cdnjs.cloudflare.com https://ka-f.fontawesome.com; "
             f"script-src 'self' 'nonce-{nonce}' https://cdn.jsdelivr.net "
             "https://cdnjs.cloudflare.com https://kit.fontawesome.com https://ka-f.fontawesome.com; "
-            "connect-src 'self' https://cdn.jsdelivr.net; "
+            "connect-src 'self' https://cdn.jsdelivr.net https://ka-f.fontawesome.com https://kit.fontawesome.com; "
             "upgrade-insecure-requests"
         )
 
