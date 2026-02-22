@@ -7,6 +7,48 @@
 {% block content %}
 <h1>About Cats Curios</h1>
 
+<section aria-labelledby="about-cat">
+    <h2 id="about-cat" class="h3">Meet the Cat</h2>
+
+    <p>
+        Hi. I’m <strong>Professor Pawsworth</strong>—part-time nap technician,
+        full-time mystery investigator, and the self-appointed historian of every suspicious rustle,
+        sunbeam, and snack packet in the neighbourhood.
+    </p>
+
+    <div class="row g-3">
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h3 class="h5">Known For</h3>
+                    <ul class="mb-0">
+                        <li>Conducting nightly “perimeter checks” (also called zoomies)</li>
+                        <li>Cataloguing boxes by comfort rating</li>
+                        <li>Detecting tuna from three rooms away</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h3 class="h5">Current Research</h3>
+                    <ul class="mb-0">
+                        <li>Why the red dot refuses to be caught</li>
+                        <li>Whether the sofa is secretly moving at night</li>
+                        <li>How many treats is “enough” (answer: more)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p class="mt-3 mb-0">
+        Every post is filed as an “official report” from my investigations—mood included.
+        Please read responsibly and offer snacks where appropriate.
+    </p>
+</section>
+
 <p>
     Cats Curios is a fictional blog built to practice modern Django development.
     Each post is a small “adventure” from a curious cat, with moods, images, and community comments.
@@ -31,4 +73,50 @@
 <p class="text-muted">
     Disclaimer: This is a student/portfolio project and the content is fictional.
 </p>
+
+<hr>
+
+<section aria-labelledby="contact">
+    <h2 id="contact" class="h3">Contact</h2>
+    <p class="mb-3">
+        Want to say hello, report a suspicious bird, or talk about the project?
+        Use any of the options below.
+    </p>
+
+    <div class="row g-3">
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h3 class="h5">Project Links</h3>
+                    <ul class="mb-0">
+                        <li>
+                            <a href="https://github.com/rikity432/CatsCurios" target="_blank" rel="noopener noreferrer">
+                                GitHub Repository
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://catscurios-aa2feb00a994.herokuapp.com/" target="_blank" rel="noopener noreferrer">
+                                Live Site
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h3 class="h5">Message</h3>
+                    <p class="mb-2">
+                        You can also reach out via email:
+                        <a href="mailto:hello@catscurios.example">hello@catscurios.example</a>
+                    </p>
+                    <p class="text-muted mb-0">
+                        (This is a demo address for the portfolio project.)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}
