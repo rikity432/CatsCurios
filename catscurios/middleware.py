@@ -28,7 +28,7 @@ class ContentSecurityPolicyMiddleware:
         nonce = getattr(request, "csp_nonce", "")
 
         # Allow required third-party CDNs currently used by templates.
-        # Keep it reasonably strict while not breaking Bootstrap/FontAwesome/
+        # Keep it reasonably strict while not breaking Bootstrap/Font Awesome/
         # Chart.js.
         csp = (
             "default-src 'self'; "
@@ -37,11 +37,11 @@ class ContentSecurityPolicyMiddleware:
             "frame-ancestors 'self'; "
             "img-src 'self' data: https://res.cloudinary.com; "
             "font-src 'self' data: https://fonts.gstatic.com "
-            "https://cdnjs.cloudflare.com; "
+            "https://cdnjs.cloudflare.com https://ka-f.fontawesome.com; "
             "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net "
             "https://fonts.googleapis.com https://cdnjs.cloudflare.com; "
             f"script-src 'self' 'nonce-{nonce}' https://cdn.jsdelivr.net "
-            "https://cdnjs.cloudflare.com; "
+            "https://cdnjs.cloudflare.com https://kit.fontawesome.com https://ka-f.fontawesome.com; "
             "connect-src 'self' https://cdn.jsdelivr.net; "
             "upgrade-insecure-requests"
         )
