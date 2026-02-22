@@ -1,17 +1,26 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block title %}About | Cats Curios{% endblock %}
 
 {% block meta_description %}Learn about Cats Curios, a cat-themed Django portfolio project featuring posts, moods, images, comments, and deployment-ready configuration.{% endblock %}
 
 {% block content %}
-<h1>About Cats Curios</h1>
+<h1 class="text-center">About Cats Curios</h1>
 
 <section aria-labelledby="about-cat">
-    <h2 id="about-cat" class="h3">Meet the Cat</h2>
+    <h2 id="about-cat" class="h3 text-center">Meet the Cat</h2>
 
-    <p>
-        Hi. I’m <strong>Professor Pawsworth</strong>—part-time nap technician,
+    <figure class="my-3 text-center">
+        <img
+            src="{% static 'img/aboutpose.jpg' %}"
+            class="img-fluid rounded d-block mx-auto"
+            alt="Professor Pawsworth posing for the camera">
+    </figure>
+
+    <p class="lead">
+        Hi. I’m <strong>Professor Pawsworth</strong>, part-time nap technician,
         full-time mystery investigator, and the self-appointed historian of every suspicious rustle,
         sunbeam, and snack packet in the neighbourhood.
     </p>
@@ -22,7 +31,7 @@
                 <div class="card-body">
                     <h3 class="h5">Known For</h3>
                     <ul class="mb-0">
-                        <li>Conducting nightly “perimeter checks” (also called zoomies)</li>
+                        <li>Conducting nightly “perimeter checks”</li>
                         <li>Cataloguing boxes by comfort rating</li>
                         <li>Detecting tuna from three rooms away</li>
                     </ul>
@@ -35,8 +44,8 @@
                     <h3 class="h5">Current Research</h3>
                     <ul class="mb-0">
                         <li>Why the red dot refuses to be caught</li>
-                        <li>Whether the sofa is secretly moving at night</li>
-                        <li>How many treats is “enough” (answer: more)</li>
+                        <li>How to make the neighbour's dog be quiet</li>
+                        <li>How many treats is “enough”</li>
                     </ul>
                 </div>
             </div>
@@ -110,9 +119,6 @@
                     <p class="mb-2">
                         You can also reach out via email:
                         <a href="mailto:hello@catscurios.example">hello@catscurios.example</a>
-                    </p>
-                    <p class="text-muted mb-0">
-                        (This is a demo address for the portfolio project.)
                     </p>
                 </div>
             </div>
