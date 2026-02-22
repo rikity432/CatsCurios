@@ -2,10 +2,25 @@
 
 A playful Django web application documenting the daily adventures of a curious cat through blog-style entries, interactive reactions, and live community features.
 
-Live Site: (https://catscurios-aa2feb00a994.herokuapp.com/)
-Repository: (https://github.com/rikity432/CatsCurios)
+Live Site: https://catscurios-aa2feb00a994.herokuapp.com/
+Repository: https://github.com/rikity432/CatsCurios
 
-📖 Project Overview
+## Table of Contents
+
+- [Project Overview](#project-overview)
+- [Project Goals](#project-goals)
+- [Features](#features)
+- [Technology Stack](#technology-stack)
+- [Database Design](#database-design)
+- [Agile Development](#agile-development)
+- [Deployment](#deployment)
+- [Testing](#testing)
+- [Future Improvements](#future-improvements)
+- [Author](#author)
+- [Source Credits](#source-credits)
+
+<a id="project-overview"></a>
+## 📖 Project Overview
 
 Cats Curios is a full-stack Django application built as a final capstone project during a 16-week programming skills bootcamp.
 
@@ -13,20 +28,20 @@ The platform allows users to follow a fictional cat’s daily experiences, inter
 
 The project demonstrates modern full-stack development practices including authentication, database design, AJAX interactions, and deployment.
 
-🎯 Project Goals
+<a id="project-goals"></a>
+## 🎯 Project Goals
 
-Build a full CRUD Django application
 
-Implement authentication & user profiles
+- Build a full CRUD Django application
+- Implement authentication & user profiles
+- Demonstrate relational database design
+- Use AJAX for dynamic UI updates
+- Deploy a production-ready application
 
-Demonstrate relational database design
+<a id="features"></a>
+## ✨ Features
 
-Use AJAX for dynamic UI updates
-
-Deploy a production-ready application
-
-✨ Features
-Core Features
+### Core Features
 
 Admin-created blog posts
 
@@ -38,7 +53,7 @@ Comment system with admin approval
 
 Mood filtering & pagination
 
-Interactive Features
+### Interactive Features
 
 AJAX like/reaction system
 
@@ -50,8 +65,10 @@ Online users tracker
 
 Mood analytics chart (Chart.js)
 
-🧱 Technology Stack
-Frontend
+<a id="technology-stack"></a>
+## 🧱 Technology Stack
+
+### Frontend
 
 HTML5
 
@@ -63,7 +80,7 @@ JavaScript (AJAX)
 
 Chart.js
 
-Backend
+### Backend
 
 Python
 
@@ -71,7 +88,7 @@ Django
 
 PostgreSQL
 
-Deployment & Tools
+### Deployment & Tools
 
 Heroku
 
@@ -81,8 +98,10 @@ GitHub
 
 Crispy Forms
 
-🗄 Database Design
-Entity Relationship Diagram
+<a id="database-design"></a>
+## 🗄 Database Design
+
+### Entity Relationship Diagram
 
 ```mermaid
 erDiagram
@@ -109,7 +128,8 @@ erDiagram
         string profile_image
         datetime last_seen
     }
-
+    <a id="agile-development"></a>
+    ## 🧠 Agile Development
     Post {
         int id PK
         string title
@@ -117,7 +137,8 @@ erDiagram
         string mood
         image featured_image
         datetime created_on
-        boolean approved
+    <a id="deployment"></a>
+    ## 🚀 Deployment
     }
 
     Comment {
@@ -129,9 +150,10 @@ erDiagram
         datetime created_on
     }
 
-    Reaction {
+    <a id="testing"></a>
+    ## 🧪 Testing
         int id PK
-        int user_id FK
+    Manual testing performed with Dev tools and inbuilt Lighthouse, HTML validator (https://validator.w3.org/) and CSS validation (https://jigsaw.w3.org/css-validator/) across:
         int post_id FK
         datetime created_on
     }
@@ -140,8 +162,22 @@ erDiagram
         int id PK
         int user_id FK
         text message
+
+    ### Validator & Lighthouse Results
+
+    ![HTML Validation](<docs/testing/images/html validation.png>)
+    ![CSS Validation](<docs/testing/images/css validation.png>)
+    ![Lighthouse Report 1](docs/testing/images/LH1.png)
+    ![Lighthouse Report 2](docs/testing/images/LH2.png)
+
+    ### Wireframes
+
+    ![Wireframes](docs/wireframes/wireframes.png)
+    ![Mobile Wireframe](<docs/wireframes/wireframe mobile.png>)
+    ![Blog Post Mobile Wireframe](<docs/wireframes/blog post mobile.png>)
         datetime created_at
-    }
+    <a id="future-improvements"></a>
+    ## 🔮 Future Improvements
 ```
 
 🧠 Agile Development
@@ -153,20 +189,19 @@ User stories tracked via GitHub Projects
 Iterative feature delivery
 
 🚀 Deployment
-
+    <a id="author"></a>
+    ## 👨‍💻 Author
 Application deployed using Heroku:
 
 PostgreSQL database configured
-
+    <a id="source-credits"></a>
+    ## Source Credits
 Cloudinary media storage enabled
 
 Environment variables secured
 
 Static files collected via WhiteNoise
 
-🧪 Testing
-
-Manual testing performed with Dev tools and inbuilt Lighthouse, HTML validator with https://validator.w3.org/ CSS validation with https://jigsaw.w3.org/css-validator/ across:
 
 Authentication flows
 
